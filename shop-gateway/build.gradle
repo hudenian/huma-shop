@@ -1,0 +1,34 @@
+plugins {
+    id 'distribution'
+}
+
+jar {
+    enabled = false
+}
+
+bootJar {
+    enabled = true
+    exclude('application-uat.yml')
+}
+
+distributions {
+    main {
+        contents {
+            from("$rootDir/scripts") {
+                include '*.yml'
+            }
+            from('build/libs') {
+                include '*.jar'
+            }
+        }
+    }
+}
+
+distTar.dependsOn(bootJar)
+distZip.dependsOn(bootJar)
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+}

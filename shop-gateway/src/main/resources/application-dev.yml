@@ -1,0 +1,16 @@
+server:
+  port: 8001
+spring:
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://localhost:8848
+      # 配置中心
+      config:
+        group: DEFAULT_GROUP
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+  config:
+    import:
+      - optional:nacos:gateway-dev.yml?group=DEFAULT_GROUP&refreshEnabled=true
+

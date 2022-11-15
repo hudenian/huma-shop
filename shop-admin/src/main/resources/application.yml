@@ -2,20 +2,8 @@ spring:
   profiles:
     active: dev
   application:
-    name: shop-gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true # 启用服务发现
-          lower-case-service-id: true
-      routes:
-        - id: auth
-          uri: lb://shop-auth
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
+    name: shop-admin
+
 
 #日志配置
 logging:
@@ -25,7 +13,7 @@ logging:
     org.springframework: info
     com.huma: info
   file:
-    name: ./logs/gateway.log
+    name: ./logs/system.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %thread | %logger{50}[%L] | %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %thread | trace-id[%X{requestId}] | %logger{50}[%L] | %msg%n"
@@ -34,7 +22,7 @@ logging:
       # 日志文件大小上限，达到该上限后，会自动压缩
       max-file-size: 200MB
       # 日志归档的文件名，日志文件达到一定大小之后，自动进行压缩归档
-      file-name-pattern: ./logs/gateway-${spring.profiles.active}-%d{yyyy-MM-dd}-%i.log.gz
+      file-name-pattern: ./logs/system-${spring.profiles.active}-%d{yyyy-MM-dd}-%i.log.gz
       # 日志文件保存的天数
       max-history: 7
       # 是否在应用启动时进行归档管理

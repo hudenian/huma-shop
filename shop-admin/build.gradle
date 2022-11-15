@@ -29,9 +29,8 @@ distTar.dependsOn(bootJar)
 distZip.dependsOn(bootJar)
 
 dependencies {
-    api project(':shop-api')
+    api project(':shop-common')
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.2'
 
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'

@@ -1,4 +1,7 @@
 rootProject.name = 'huma-shop'
 include 'shop-gateway'
 include 'shop-auth'
+include 'shop-admin'
+include 'shop-api'
+include 'shop-common'
 

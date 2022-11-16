@@ -15,6 +15,6 @@ public class SystemUserServiceImpl implements SystemUserService {
 
     @Override
     public String loadUserByUsername(String username) {
-        return  userFeignClient.getUserByUsername(username).getData();
+        return  userFeignClient.getUserByUserName(username).getData();
     }
 }

@@ -28,7 +28,13 @@ distTar.dependsOn(bootJar)
 distZip.dependsOn(bootJar)
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    api project(':shop-common')
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+    implementation 'com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    implementation 'com.alibaba.csp:sentinel-datasource-nacos'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 }

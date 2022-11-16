@@ -85,7 +85,6 @@ subprojects {
         implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.0.1.0'
         implementation 'org.springframework.cloud:spring-cloud-starter'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.12.0'

@@ -18,7 +18,7 @@ public class SysUserController {
 
 
     @GetMapping("/username/{username}")
-    public Result<String> getUserByUsername( @PathVariable String username) {
+    public Result<String> getUserByUserName( @PathVariable String username) {
         String user = username + System.currentTimeMillis();
         return Result.success(user);
     }

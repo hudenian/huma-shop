@@ -16,6 +16,12 @@ spring:
             - Path=/auth/**
           filters:
             - StripPrefix=1
+        - id: admin
+          uri: lb://shop-admin
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
 
 #日志配置
 logging:

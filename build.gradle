@@ -1,11 +1,13 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.11'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id 'java'
+    id 'org.springframework.boot' version "${SpringBootVersion}" apply(false)
+    id 'io.spring.dependency-management' version "${DependencyManagement}" apply(false)
+    id 'java-library'
 }
 
-// 作用于所有模块
 allprojects {
+    group "${group}"
+    version "${version}"
+
     repositories {
         mavenLocal()
         maven {
@@ -18,62 +20,68 @@ allprojects {
             url 'https://repo.maven.apache.org/maven2'
             name 'Maven Central'
         }
+        maven {
+            url 'https://repo.spring.io/release'
+        }
     }
+}
 
-    group = 'com.huma'
-    version = '1.0.0'
-
+subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
-    // spring 插件
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
-    // spring依赖管理
     apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+        }
+    }
 
-    // lombok需要可插拔式注解处理器
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    test {
+        useJUnitPlatform()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+
     configurations {
         compileOnly {
             extendsFrom annotationProcessor
         }
     }
 
-    // 所有子模块都有这些依赖
-    dependencies {
-
-        /**
-         * implementation： 依赖不会传递
-         * compile：依赖会传递
-         */
-        implementation 'org.springframework.cloud:spring-cloud-dependencies:2021.0.4'
-        implementation 'com.alibaba.cloud:spring-cloud-alibaba-starters:2021.0.4.0'
-        implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.0.4.0'
-        implementation 'org.springframework.cloud:spring-cloud-starter'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'commons-io:commons-io:2.11.0'
-        implementation 'org.apache.commons:commons-lang3:3.12.0'
-        implementation 'com.alibaba:fastjson:2.0.19'
-        compileOnly 'org.projectlombok:lombok'
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        annotationProcessor 'org.projectlombok:lombok'
-        testImplementation('org.springframework.boot:spring-boot-starter-test') {
-            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-        }
-    }
-
-    dependencyManagement {
-        imports {
-            // 注意，模板字符串只能用“”
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.4"
-            // SpringCloud Alibaba
-            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2021.0.4.0"
-        }
-    }
-
     test {
         useJUnitPlatform()
+    }
+
+    dependencies {
+        implementation "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        implementation "com.alibaba.cloud:spring-cloud-alibaba-starters:${springCloudAlibabaVersion}"
+        implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:${springCloudAlibabaVersion}"
+        implementation "org.springframework.cloud:spring-cloud-starter"
+        implementation "org.springframework.boot:spring-boot-starter-actuator"
+        implementation "org.springframework.boot:spring-boot-starter-validation"
+        implementation "commons-io:commons-io:${commonsIoVersion}"
+        implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+        implementation "com.alibaba:fastjson:${fastjsonVersion}"
+        compileOnly "org.projectlombok:lombok"
+        developmentOnly "org.springframework.boot:spring-boot-devtools"
+        annotationProcessor "org.projectlombok:lombok"
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude group: "org.junit.vintage", module: 'junit-vintage-engine'
+        }
     }
 }
 

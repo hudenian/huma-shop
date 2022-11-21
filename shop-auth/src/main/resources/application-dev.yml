@@ -1,6 +1,10 @@
 server:
   port: 8003
 spring:
+  mvc:
+    path match:
+      # 配置策略
+      matching-strategy: ANT_PATH_MATCHER
   cloud:
     nacos:
       # 注册中心

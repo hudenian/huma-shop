@@ -39,4 +39,8 @@ dependencies {
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.33.0'
     implementation 'cn.dev33:sa-token-dao-redis-jackson:1.33.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation "cn.hutool:hutool-all"
+    implementation "com.github.xiaoymin:knife4j-spring-boot-starter"
+    api "org.springframework:spring-webmvc"
 }

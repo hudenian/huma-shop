@@ -31,11 +31,10 @@ distZip.dependsOn(bootJar)
 dependencies {
     api project(':shop-api')
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.2'
-
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'io.github.openfeign:feign-okhttp'
+    implementation "com.github.xiaoymin:knife4j-spring-boot-starter"
 }
